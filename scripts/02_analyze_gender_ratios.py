@@ -1,5 +1,4 @@
 import csv
-from collections import Counter
 
 def compute_gender_ratios():
     gender_counts = {}
