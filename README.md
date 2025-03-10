@@ -6,7 +6,43 @@
 
 This project simulates and analyzes the Boy or Girl Paradox, a famous probability problem exploring how stopping rules influence gender distributions in families. We implement multiple family-planning strategies and examine their statistical properties using Monte Carlo simulations, chi-square tests, and data visualization.
 
+### **Mathematical Foundation**
 
+Let $X$ represent a child's gender, where:
+- $P(X = B) = p$
+- $P(X = G) = 1 - p$
+
+Typically, $p \approx 0.512$ due to biological birth biases.
+
+#### **Expected Gender Ratio**
+
+Given a stopping rule $S$, the expected number of boys and girls follows:
+$$\[E[B] = \sum_{n=1}^{\infty} n P(B_n | S)\]$$
+$$\[E[G] = \sum_{n=1}^{\infty} n P(G_n | S)\]$$
+where $P(B_n | S)$ and $P(G_n | S)$ denote the probability of the $n$-th child being a boy or girl under stopping rule $S$.
+
+#### **Stopping Rule Effects**
+
+Consider the stopping rule **"Stop at first boy"**:
+
+If each child is independently born male with probability $p$, the probability mass function (PMF) of family size follows a geometric distribution:
+$$\[P(N = k) = (1 - p)^{k-1} p\]$$
+with an expected family size of:
+$$\[E[N] = \frac{1}{p}\]$$
+
+This leads to an expected gender ratio of:
+$$\[E[B] = 1, \quad E[G] = \frac{1-p}{p}\]$$
+
+For **"Stop at first girl"**, symmetry yields:
+$$\[E[G] = 1, \quad E[B] = \frac{p}{1-p}\]$$
+
+### **Statistical Testing**
+
+We use a **Chi-Square Goodness of Fit Test** to compare observed gender distributions to expected values:
+$$\[\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}\]$$
+where $O_i$ and $E_i$ are observed and expected frequencies for gender counts.
+
+If $p < 0.05$, we reject the null hypothesis that the observed ratios follow expected distributions.
 
 ## Folder Structure
 ```
